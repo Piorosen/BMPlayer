@@ -12,6 +12,8 @@ let package = Package(
             targets: ["BMPlayer"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/ninjaprox/NVActivityIndicatorView.git", from: "5.0.0"),
+        .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.0.0")
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -20,7 +22,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "BMPlayer",
-            dependencies: []),
+            dependencies: ["NVActivityIndicatorView", "SnapKit"]),
         .testTarget(
             name: "BMPlayerTests",
             dependencies: ["BMPlayer"]),
