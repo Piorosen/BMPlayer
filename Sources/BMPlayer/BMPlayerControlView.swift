@@ -10,7 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 
 
-@objc public protocol BMPlayerControlViewDelegate: class {
+@objc public protocol BMPlayerControlViewDelegate: AnyObject {
     /**
      call when control view choose a definition
      
@@ -240,8 +240,7 @@ open class BMPlayerControlView: UIView {
      */
     open func controlViewAnimation(isShow: Bool) {
         let alpha: CGFloat = isShow ? 1.0 : 0.0
-        self.isMaskShowing = isShow
-        
+        self.isMaskShowing = isShow        
         UIApplication.shared.setStatusBarHidden(!isShow, with: .fade)
         
         UIView.animate(withDuration: 0.3, animations: {[weak self] in
@@ -363,7 +362,7 @@ open class BMPlayerControlView: UIView {
             chooseDefinitionView.addSubview(button)
             button.addTarget(self, action: #selector(self.onDefinitionSelected(_:)), for: UIControl.Event.touchUpInside)
             button.snp.makeConstraints({ [weak self](make) in
-                guard let `self` = self else { return }
+                guard self != nil else { return }
                 make.top.equalTo(chooseDefinitionView.snp.top).offset(35 * i)
                 make.width.equalTo(50)
                 make.height.equalTo(25)
